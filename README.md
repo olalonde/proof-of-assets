@@ -13,7 +13,17 @@ npm install -g baproof
 ## Usage
 
 ```
-$ baproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-assets.json
+Generate bitcoin asset proof
+
+$ baproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-asset-proof.out.json
+
+Verify signatures
+
+$ baproof verifysignatures btc-asset-proof.out.json
+
+Verify signatures and show total balance of all addresses
+
+$ baproof balance -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" btc-asset-proof.out.json
 ```
 
 ## Assets proof
@@ -40,3 +50,11 @@ Bitcoin wallet.
   "type": "BTC" (optional - defaults to bitcoin)
 }
 ```
+
+## Limitations
+
+TODO... (you could convince someone else to signmessage for you?) There
+could be an online wallet which allows you to signmessage without
+revealing the private key, etc. etc. Might be interesting to explore the
+"make transaction"/"far future lock time" solution. Maybe combine
+multiple solutions together?

@@ -29,12 +29,56 @@ program
   .action(function (file) {
     var obj = JSON.parse(fs.readFileSync(file));
     if (baproof.verifySignatures(obj)) {
-      console.log('All signatures are valid!');
+      console.log(obj.id + ' signatures are valid!');
     }
     else {
       console.error('INVALID signature found!');
       process.exit(-1);
     }
+  });
+
+program
+  .command('balance <file>')
+  .description('Calculate the total balance of an asset proof.')
+  .action(function (file) {
+    var obj = JSON.parse(fs.readFileSync(file));
+
+    if (!baproof.verifySignatures(obj)) {
+      console.error('INVALID signature found!');
+      process.exit(-1);
+    }
+
+    var client = new bitcoin.Client({
+      host: program.host,
+      port: program.port,
+      user: program.user,
+      pass: program.pass
+    });
+
+    var total = 0;
+    var addresses = [];
+    // remove duplicates. see http://stackoverflow.com/a/14740171/96855
+    var dups = {};
+    obj.signatures.forEach(function (hash) {
+      if (dups[hash.address]) return;
+      dups[hash.address] = true;
+      addresses.push(hash.address);
+    });
+
+    async.each(addresses, function (addr, cb) {
+      client.cmd('getreceivedbyaddress', addr, function (err, res) {
+        if (err) return console.error(err);
+        total += Number(res);
+        cb();
+      });
+    }, function (err) {
+      if (err) { 
+        console.log(err);
+        process.exit(-1);
+      }
+      console.log(total);
+    });
+    
   });
 
 program
@@ -53,7 +97,6 @@ program
       //if (err) return console.log(err);
       //console.log('Balance:', balance);
     //});
-
 
     var addresses = opts.addresses || [],
       output = {
