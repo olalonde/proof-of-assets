@@ -1,8 +1,8 @@
-WORK IN PROGRESS. See [olalonde/blind-liability-proof](https://github.com/olalonde/blind-liability-proof)
-
 # bitcoin-asset-proof
 
-Scheme and companiontool to prove how many bitcoins someone controls.
+Scheme and companion tool to prove how many bitcoins an entity controls.
+
+Intended for use as part of [olalonde/blind-solvency-proof](https://github.com/olalonde/blind-solvency-proof).
 
 ## Install
 
@@ -24,6 +24,10 @@ $ baproof verifysignatures btc-asset-proof.out.json
 Verify signatures and show total balance of all addresses
 
 $ baproof balance -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" btc-asset-proof.out.json
+
+Browser build:
+
+$ browserify ./lib/index.js --standalone baproof > build/baproof.js
 ```
 
 ## Assets proof

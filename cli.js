@@ -56,14 +56,7 @@ program
     });
 
     var total = 0;
-    var addresses = [];
-    // remove duplicates. see http://stackoverflow.com/a/14740171/96855
-    var dups = {};
-    obj.signatures.forEach(function (hash) {
-      if (dups[hash.address]) return;
-      dups[hash.address] = true;
-      addresses.push(hash.address);
-    });
+    var addresses = baproof.getAddresses(obj);
 
     async.each(addresses, function (addr, cb) {
       client.cmd('getreceivedbyaddress', addr, function (err, res) {
