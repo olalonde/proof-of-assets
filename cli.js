@@ -3,6 +3,7 @@
 var program = require('commander'),
   bitcoin = require('bitcoin'),
   async = require('async'),
+  baproof = require('./'),
   fs = require('fs');
 
 program
@@ -21,6 +22,20 @@ function parse_list (str) {
   }
   return arr;
 }
+
+program
+  .command('verifysignatures <file>')
+  .description('Verify that all signatures in <file> are valid.')
+  .action(function (file) {
+    var obj = JSON.parse(fs.readFileSync(file));
+    if (baproof.verifySignatures(obj)) {
+      console.log('All signatures are valid!');
+    }
+    else {
+      console.error('INVALID signature found!');
+      process.exit(-1);
+    }
+  });
 
 program
   .command('signall <id>')

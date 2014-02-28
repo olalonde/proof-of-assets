@@ -31,6 +31,7 @@
   "dependencies": {
     "commander": "~2.1.0",
     "bitcoin": "~2.0.1",
-    "async": "~0.2.10"
+    "async": "~0.2.10",
+    "bitcoinjs-lib": "https://github.com/olalonde/bitcoinjs-lib"
   }
 }
