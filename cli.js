@@ -39,24 +39,34 @@ program
       //console.log('Balance:', balance);
     //});
 
-    //@TODO: batch requests https://github.com/freewil/node-bitcoin#batch-multiple-rpc-calls-into-single-http-request
 
-    var addresses = opts.addresses,
+    var addresses = opts.addresses || [],
       output = {
         id: id,
         signatures: []
       };
 
+    //@TODO: batch requests https://github.com/freewil/node-bitcoin#batch-multiple-rpc-calls-into-single-http-request
+    // nevermind, there seems to be a bug with batch requests :(
     async.series([
       function (cb) {
-        if (addresses) return cb();
+        if (addresses.length > 0) return cb();
 
         client.cmd('listreceivedbyaddress', 1, function (err, res){
           if (err) return cb(err);
+
+          if (!res.length) {
+            return cb('No address found in bitcoin wallet!');
+          }
+
+          res.forEach(function (hash) {
+            addresses.push(hash.address);
+          });
           cb();
         });
       },
       function (cb) {
+
         async.each(addresses, function (addr, cb) {
           client.cmd('signmessage', addr, id, function (err, res) {
             if (err) return cb(err);
