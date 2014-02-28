@@ -1,8 +1,12 @@
-# bitcoin-asset-proof
+# baproof - Bitcoin asset proof
+
+Intended for use as part of
+[olalonde/blind-solvency-proof](https://github.com/olalonde/blind-solvency-proof)
+scheme.
 
 Scheme and companion tool to prove how many bitcoins an entity controls.
 
-Intended for use as part of [olalonde/blind-solvency-proof](https://github.com/olalonde/blind-solvency-proof).
+Beer fund: **1ECyyu39RtDNAuk3HRCRWwD4syBF2ZGzdx**
 
 ## Install
 
