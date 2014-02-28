@@ -13,7 +13,7 @@ npm install -g baproof
 ## Usage
 
 ```
-baproof signall signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-assets.json
+$ baproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-assets.json
 ```
 
 ## Assets proof
