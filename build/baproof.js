@@ -6662,10 +6662,14 @@ function get_balance (addresses, cb) {
       });
     }).on('error', cb);
   }, function (err) {
+    // Total is in satoshis! Convert to BTC.
+    // (btc has 8 decimals)
+    total = total / 1e8; 
     cb(err, total);
   });
 
-  return total;
+  
+  return; 
 }
 
 module.exports.verifySignatures = verify_signatures;
