@@ -103,7 +103,7 @@ program
       function (cb) {
         if (addresses.length > 0) return cb();
 
-        client.cmd('listreceivedbyaddress', 1, function (err, res){
+        client.cmd('listreceivedbyaddress', 0, true, function (err, res){
           if (err) return cb(err);
 
           if (!res.length) {
