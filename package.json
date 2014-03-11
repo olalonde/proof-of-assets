@@ -1,6 +1,6 @@
 {
   "name": "baproof",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Tool to prove how many bitcoins someone controls. Intended for use as part of the blind-solvency-proof scheme.",
   "main": "index.js",
   "bin": {
