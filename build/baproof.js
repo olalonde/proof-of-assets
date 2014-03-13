@@ -6470,6 +6470,9 @@ module.exports=_dereq_(2)
 },{}],28:[function(_dereq_,module,exports){
 module.exports=_dereq_(3)
 },{"./support/isBuffer":27,"/Users/olalonde/.nvm/v0.10.10/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":13,"inherits":12}],29:[function(_dereq_,module,exports){
+module.exports = _dereq_('./lib/');
+
+},{"./lib/":31}],30:[function(_dereq_,module,exports){
 // https://raw.github.com/brainwallet/brainwallet.github.com/master/js/bitcoinsig.js
 // bitcoinsig.js - sign and verify messages with bitcoin address (public domain)
 
@@ -6599,7 +6602,7 @@ function bitcoinsig_test() {
 
 module.exports.verifyMessage = verify_message;
 
-},{"bitcoinjs-lib":43,"bitcoinjs-lib/src/jsbn/sec":48}],30:[function(_dereq_,module,exports){
+},{"bitcoinjs-lib":44,"bitcoinjs-lib/src/jsbn/sec":49}],31:[function(_dereq_,module,exports){
 var bitcoinsig = _dereq_('./bitcoinsig'),
   async = _dereq_('async'),
   http = _dereq_('http');
@@ -6615,7 +6618,6 @@ function verify_signature (addr, sig, message) {
 
 function verify_signatures (obj) {
   var message = obj.id;
-  
   for (var i = 0; i < obj.signatures.length; i++) {
     var addr = obj.signatures[i].address;
     var sig = obj.signatures[i].signature;
@@ -6642,10 +6644,11 @@ function get_addresses (obj) {
 // We use the blockchain.info API
 function get_balance (addresses, cb) {
   var total = 0;
+  var parallel_ops = 5;
 
-  async.each(addresses, function (addr, cb) {
-    http.get({ 
-      host: 'blockchain.info', 
+  async.eachLimit(addresses, parallel_ops, function (addr, cb) {
+    http.get({
+      host: 'blockchain.info',
       path : '/address/' + addr + '?format=json',
       scheme: 'http'
     }, function (res) {
@@ -6664,19 +6667,16 @@ function get_balance (addresses, cb) {
   }, function (err) {
     // Total is in satoshis! Convert to BTC.
     // (btc has 8 decimals)
-    total = total / 1e8; 
+    total = total / 1e8;
     cb(err, total);
   });
-
-  
-  return; 
 }
 
 module.exports.verifySignatures = verify_signatures;
 module.exports.getBalance = get_balance;
 module.exports.getAddresses = get_addresses;
 
-},{"./bitcoinsig":29,"async":31,"http":8}],31:[function(_dereq_,module,exports){
+},{"./bitcoinsig":30,"async":32,"http":8}],32:[function(_dereq_,module,exports){
 (function (process){
 /*global setImmediate: false, setTimeout: false, console: false */
 (function () {
@@ -7638,7 +7638,7 @@ module.exports.getAddresses = get_addresses;
 }());
 
 }).call(this,_dereq_("/Users/olalonde/.nvm/v0.10.10/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/Users/olalonde/.nvm/v0.10.10/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":13}],32:[function(_dereq_,module,exports){
+},{"/Users/olalonde/.nvm/v0.10.10/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":13}],33:[function(_dereq_,module,exports){
 var base58 = _dereq_('./base58');
 var Crypto = _dereq_('./crypto-js/crypto');
 var conv = _dereq_('./convert');
@@ -7709,7 +7709,7 @@ Address.p2sh_types = {
 
 module.exports = Address;
 
-},{"./base58":33,"./convert":34,"./crypto-js/crypto":35,"./util":53}],33:[function(_dereq_,module,exports){
+},{"./base58":34,"./convert":35,"./crypto-js/crypto":36,"./util":54}],34:[function(_dereq_,module,exports){
 
 // https://en.bitcoin.it/wiki/Base58Check_encoding
 
@@ -7830,7 +7830,7 @@ module.exports.checkDecodeHex = function (input) {
 
 
 
-},{"./convert":34,"./crypto-js/crypto":35,"./jsbn/jsbn":45}],34:[function(_dereq_,module,exports){
+},{"./convert":35,"./crypto-js/crypto":36,"./jsbn/jsbn":46}],35:[function(_dereq_,module,exports){
 // convert to/from various values
 
 var base64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -7906,7 +7906,7 @@ module.exports.stringToBytes = function(string) {
 
 // utf8
 
-},{}],35:[function(_dereq_,module,exports){
+},{}],36:[function(_dereq_,module,exports){
 /*!
  * Crypto-JS v2.0.0
  * http://code.google.com/p/crypto-js/
@@ -7974,7 +7974,7 @@ module.exports.SHA512 = _dereq_('./sha512');
 module.exports.RIPEMD160 = _dereq_('./ripemd160');
 module.exports.HMAC = _dereq_('./hmac');
 
-},{"./hmac":36,"./ripemd160":37,"./sha256":38,"./sha512":39}],36:[function(_dereq_,module,exports){
+},{"./hmac":37,"./ripemd160":38,"./sha256":39,"./sha512":40}],37:[function(_dereq_,module,exports){
 /*!
  * Crypto-JS v2.0.0
  * http://code.google.com/p/crypto-js/
@@ -8014,7 +8014,7 @@ module.exports = function (hasher, message, key, options) {
 
 };
 
-},{"../convert":34,"../util":53}],37:[function(_dereq_,module,exports){
+},{"../convert":35,"../util":54}],38:[function(_dereq_,module,exports){
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -8225,7 +8225,7 @@ module.exports = function(message, options) {
         conv.bytesToHex(digestbytes);
 };
 
-},{"../convert":34,"./crypto":35}],38:[function(_dereq_,module,exports){
+},{"../convert":35,"./crypto":36}],39:[function(_dereq_,module,exports){
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -8361,7 +8361,7 @@ module.exports = function(message, options) {;
 
 module.exports._blocksize = 64
 
-},{"../convert":34,"../util":53}],39:[function(_dereq_,module,exports){
+},{"../convert":35,"../util":54}],40:[function(_dereq_,module,exports){
 var conv = _dereq_('../convert');
 var util = _dereq_('../util');
 
@@ -8602,7 +8602,7 @@ module.exports = function(message, options) {;
 
 module.exports._blocksize = 128
 
-},{"../convert":34,"../util":53}],40:[function(_dereq_,module,exports){
+},{"../convert":35,"../util":54}],41:[function(_dereq_,module,exports){
 var sec = _dereq_('./jsbn/sec');
 var util = _dereq_('./util');
 var SecureRandom = _dereq_('./jsbn/rng');
@@ -8909,7 +8909,7 @@ var ECDSA = {
 module.exports = ECDSA;
 
 
-},{"./convert":34,"./crypto-js/crypto.js":35,"./eckey":41,"./jsbn/ec":44,"./jsbn/jsbn":45,"./jsbn/rng":47,"./jsbn/sec":48,"./util":53}],41:[function(_dereq_,module,exports){
+},{"./convert":35,"./crypto-js/crypto.js":36,"./eckey":42,"./jsbn/ec":45,"./jsbn/jsbn":46,"./jsbn/rng":48,"./jsbn/sec":49,"./util":54}],42:[function(_dereq_,module,exports){
 var BigInteger = _dereq_('./jsbn/jsbn');
 var sec = _dereq_('./jsbn/sec');
 var base58 = _dereq_('./base58');
@@ -9128,7 +9128,7 @@ ECKey.prototype.verify = function (hash, sig) {
 
 module.exports = { ECKey: ECKey, ECPubKey: ECPubKey };
 
-},{"./address":32,"./base58":33,"./convert":34,"./crypto-js/crypto":35,"./ecdsa":40,"./jsbn/ec":44,"./jsbn/jsbn":45,"./jsbn/sec":48,"./util":53}],42:[function(_dereq_,module,exports){
+},{"./address":33,"./base58":34,"./convert":35,"./crypto-js/crypto":36,"./ecdsa":41,"./jsbn/ec":45,"./jsbn/jsbn":46,"./jsbn/sec":49,"./util":54}],43:[function(_dereq_,module,exports){
 var convert = _dereq_('./convert.js')
 , base58 = _dereq_('./base58.js')
 , assert = _dereq_('assert')
@@ -9365,7 +9365,7 @@ HDWallet.prototype.derivePrivate = function(index) {
 
 HDWallet.prototype.toString = HDWallet.prototype.toBase58
 
-},{"./address.js":32,"./base58.js":33,"./convert.js":34,"./crypto-js/crypto.js":35,"./eckey.js":41,"./util.js":53,"assert":1,"util":28}],43:[function(_dereq_,module,exports){
+},{"./address.js":33,"./base58.js":34,"./convert.js":35,"./crypto-js/crypto.js":36,"./eckey.js":42,"./util.js":54,"assert":1,"util":28}],44:[function(_dereq_,module,exports){
 // Bit-wise rotate left
 var rotl = function (n, b) {
     return (n << b) | (n >>> (32 - b));
@@ -9421,7 +9421,7 @@ module.exports = {
     endian: endian
 }
 
-},{"./address":32,"./base58":33,"./convert":34,"./crypto-js/crypto":35,"./ecdsa":40,"./eckey":41,"./hdwallet.js":42,"./jsbn/ec":44,"./jsbn/jsbn":45,"./message":49,"./opcode":50,"./script":51,"./transaction":52,"./util":53,"./wallet":54}],44:[function(_dereq_,module,exports){
+},{"./address":33,"./base58":34,"./convert":35,"./crypto-js/crypto":36,"./ecdsa":41,"./eckey":42,"./hdwallet.js":43,"./jsbn/ec":45,"./jsbn/jsbn":46,"./message":50,"./opcode":51,"./script":52,"./transaction":53,"./util":54,"./wallet":55}],45:[function(_dereq_,module,exports){
 // Basic Javascript Elliptic Curve implementation
 // Ported loosely from BouncyCastle's Java EC code
 // Only Fp curves implemented for now
@@ -9945,7 +9945,7 @@ ECPointFp.prototype.validate = function () {
 module.exports = ECCurveFp;
 module.exports.ECPointFp = ECPointFp;
 
-},{"./jsbn":45,"./sec":48}],45:[function(_dereq_,module,exports){
+},{"./jsbn":46,"./sec":49}],46:[function(_dereq_,module,exports){
 // Copyright (c) 2005  Tom Wu
 // All Rights Reserved.
 // See "LICENSE" for details.
@@ -11246,7 +11246,7 @@ BigInteger.prototype.toByteArraySigned = function() {
 
 module.exports = BigInteger;
 
-},{}],46:[function(_dereq_,module,exports){
+},{}],47:[function(_dereq_,module,exports){
 // prng4.js - uses Arcfour as a PRNG
 
 function Arcfour() {
@@ -11287,7 +11287,7 @@ Arcfour.prototype.next = ARC4next;
 module.exports = Arcfour;
 
 
-},{}],47:[function(_dereq_,module,exports){
+},{}],48:[function(_dereq_,module,exports){
 // Random number generator - requires a PRNG backend, e.g. prng4.js
 // prng4.js - uses Arcfour as a PRNG
 
@@ -11374,7 +11374,7 @@ SecureRandom.prototype.nextBytes = rng_get_bytes;
 
 module.exports = SecureRandom;
 
-},{"./prng4":46}],48:[function(_dereq_,module,exports){
+},{"./prng4":47}],49:[function(_dereq_,module,exports){
 // Named EC curves
 
 // Requires ec.js, jsbn.js, and jsbn2.js
@@ -11554,7 +11554,7 @@ function getSECCurveByName(name) {
 
 module.exports = getSECCurveByName;
 
-},{"./ec":44,"./jsbn":45}],49:[function(_dereq_,module,exports){
+},{"./ec":45,"./jsbn":46}],50:[function(_dereq_,module,exports){
 /// Implements Bitcoin's feature for signing arbitrary messages.
 
 var Crypto = _dereq_('./crypto-js/crypto');
@@ -11624,7 +11624,7 @@ Message.verifyMessage = function (address, sig, message) {
 
 module.exports = Message;
 
-},{"./convert":34,"./crypto-js/crypto":35,"./ecdsa":40,"./util":53}],50:[function(_dereq_,module,exports){
+},{"./convert":35,"./crypto-js/crypto":36,"./ecdsa":41,"./util":54}],51:[function(_dereq_,module,exports){
 var Opcode = function (num) {
   this.code = num;
 };
@@ -11780,7 +11780,7 @@ for (var i in Opcode.map) {
 
 module.exports = Opcode;
 
-},{}],51:[function(_dereq_,module,exports){
+},{}],52:[function(_dereq_,module,exports){
 var Opcode = _dereq_('./opcode');
 var util = _dereq_('./util');
 var conv = _dereq_('./convert');
@@ -12164,7 +12164,7 @@ Script.prototype.clone = function ()
 
 module.exports = Script;
 
-},{"./address":32,"./convert":34,"./opcode":50,"./util":53}],52:[function(_dereq_,module,exports){
+},{"./address":33,"./convert":35,"./opcode":51,"./util":54}],53:[function(_dereq_,module,exports){
 var BigInteger = _dereq_('./jsbn/jsbn');
 var Script = _dereq_('./script');
 var util = _dereq_('./util');
@@ -12754,7 +12754,7 @@ module.exports.Transaction = Transaction;
 module.exports.TransactionIn = TransactionIn;
 module.exports.TransactionOut = TransactionOut;
 
-},{"./address":32,"./convert":34,"./crypto-js/crypto":35,"./ecdsa":40,"./eckey":41,"./jsbn/jsbn":45,"./script":51,"./util":53,"./wallet":54}],53:[function(_dereq_,module,exports){
+},{"./address":33,"./convert":35,"./crypto-js/crypto":36,"./ecdsa":41,"./eckey":42,"./jsbn/jsbn":46,"./script":52,"./util":54,"./wallet":55}],54:[function(_dereq_,module,exports){
 var Crypto = _dereq_('./crypto-js/crypto');
 
 /**
@@ -12825,7 +12825,7 @@ exports.error = function(msg) {
     throw new Error(msg);
 }
 
-},{"./crypto-js/crypto":35}],54:[function(_dereq_,module,exports){
+},{"./crypto-js/crypto":36}],55:[function(_dereq_,module,exports){
 var Script = _dereq_('./script');
 var ECKey = _dereq_('./eckey').ECKey;
 var conv = _dereq_('./convert');
@@ -13024,6 +13024,6 @@ var Wallet = function (seed, options) {
 
 module.exports = Wallet;
 
-},{"./convert":34,"./eckey":41,"./hdwallet.js":42,"./jsbn/jsbn":45,"./jsbn/rng":47,"./script":51,"./transaction":52,"./util":53,"assert":1}]},{},[30])
-(30)
+},{"./convert":35,"./eckey":42,"./hdwallet.js":43,"./jsbn/jsbn":46,"./jsbn/rng":48,"./script":52,"./transaction":53,"./util":54,"assert":1}]},{},[29])
+(29)
 });

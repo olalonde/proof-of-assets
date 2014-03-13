@@ -65,13 +65,12 @@ program
         cb();
       });
     }, function (err) {
-      if (err) { 
-        console.log(err);
+      if (err) {
+        console.error(err);
         process.exit(-1);
       }
       console.log(total);
     });
-    
   });
 
 program
@@ -132,7 +131,7 @@ program
         }, cb);
       }
     ], function (err) {
-      if (err) return console.error(err);            
+      if (err) return console.error(err);
       if (program.human) {
         console.log(output);
       }
