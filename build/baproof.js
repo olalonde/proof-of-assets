@@ -6485,7 +6485,8 @@ function sign_all (private_keys, message) {
   var res = { id: message, signatures: [] };
 
   private_keys.forEach(function (priv) {
-    var key = new bitcoinjs.ECKey(bitcoinjs.convert.hexToBytes(priv));
+    var bytes = bitcoinjs.base58.checkDecode(priv);
+    var key = new bitcoinjs.ECKey(bytes);
     var sig = bitcoinjs.Message.signMessage(key, message);
     var addr = key.getBitcoinAddress().toString();
     res.signatures.push({
