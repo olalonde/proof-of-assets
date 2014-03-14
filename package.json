@@ -1,6 +1,6 @@
 {
   "name": "baproof",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Tool to prove how many bitcoins someone controls. Intended for use as part of the blind-solvency-proof scheme.",
   "main": "index.js",
   "bin": {
@@ -28,10 +28,13 @@
   "bugs": {
     "url": "https://github.com/olalonde/bitcoin-asset-proof/issues"
   },
+  "devDependencies": {
+    "browserify": "~3.32.1"
+  },
   "dependencies": {
     "commander": "~2.1.0",
     "bitcoin": "~2.0.1",
     "async": "~0.2.10",
-    "bitcoinjs-lib": "git://github.com/olalonde/bitcoinjs-lib.git"
+    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git"
   }
 }

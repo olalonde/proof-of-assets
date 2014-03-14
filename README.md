@@ -5,6 +5,10 @@ Intended for use as part of
 scheme.
 
 Scheme and companion tool to prove how many bitcoins an entity controls.
+Currently supports bitcoind (see [Alternative
+implementations](#alternative-implementations)).
+
+*NEW*: [web UI](http://olalonde.github.io/bitcoin-asset-proof)
 
 Beer fund: **1ECyyu39RtDNAuk3HRCRWwD4syBF2ZGzdx**
 
@@ -57,6 +61,16 @@ Bitcoin wallet.
   ],
   "type": "BTC" (optional - defaults to bitcoin)
 }
+```
+
+## Alternative implementations
+
+### Armory
+
+See https://github.com/etotheipi/BitcoinArmory/pull/184/files
+
+```
+./extras/asset-proof.py  your.wallet "EmptyGox Btc Assets" emptygox-btc-assets.json
 ```
 
 ## Limitations
