@@ -6,7 +6,7 @@ scheme.
 
 Scheme and companion tool to prove how many bitcoins an entity controls.
 Currently supports bitcoind (see [Alternative
-implementations](#alternative-implementations).
+implementations](#alternative-implementations)).
 
 Beer fund: **1ECyyu39RtDNAuk3HRCRWwD4syBF2ZGzdx**
 
