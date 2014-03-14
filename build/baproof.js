@@ -6493,6 +6493,7 @@ function sign_all (private_keys, message) {
 
     var key = new bitcoinjs.ECKey(bytes, compressed);
     var addr = key.getBitcoinAddress().toString();
+
     var sig = bitcoinjs.Message.signMessage(key, message);
 
     res.signatures.push({
