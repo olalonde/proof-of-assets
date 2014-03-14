@@ -6536,7 +6536,7 @@ function get_balance (addresses, cb) {
   async.eachLimit(addresses, parallel_ops, function (addr, cb) {
     http.get({
       host: 'blockchain.info',
-      path : '/address/' + addr + '?format=json&cors=true',
+      path : '/q/addressbalance/' + addr + '?format=json&cors=true&confirmations=6',
       scheme: 'http'
     }, function (res) {
       var data = '';
@@ -6546,8 +6546,7 @@ function get_balance (addresses, cb) {
       });
 
       res.on('end', function () {
-        data = JSON.parse(data);
-        total += data.final_balance;
+        total += Number(data);
         cb();
       });
     }).on('error', cb);
