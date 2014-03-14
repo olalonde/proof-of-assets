@@ -76,7 +76,7 @@ $(function () {
           html += JSON.stringify(err);
         }
         else {
-          html += '<h3>Balance: ' + balance + '</h3>';
+          html += '<br><br><strong>Balance: </strong>' + balance + ' BTC';
         }
         $('#verification').html(html);
       });
