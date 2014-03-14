@@ -70,18 +70,15 @@ $(function () {
       addresses.push(obj.address);
     });
 
-    try {
-      baproof.getBalance(addresses, function (err, balance) {
-        if (err) {
-          html += JSON.stringify(err);
-        }
-        else {
-          html += '<br><br><strong>Balance: </strong>' + balance + ' BTC';
-        }
-        $('#verification').html(html);
-      });
-    }
-    catch (err) {}
+    baproof.getBalance(addresses, function (err, balance) {
+      if (err) {
+        html += JSON.stringify(err);
+      }
+      else {
+        html += '<br><br><strong>Balance: </strong>' + balance + ' BTC';
+      }
+      $('#verification').html(html);
+    });
   });
 });
 
