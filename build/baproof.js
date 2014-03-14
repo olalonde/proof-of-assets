@@ -6477,7 +6477,6 @@ var bitcoinjs = _dereq_('bitcoinjs-lib'),
   async = _dereq_('async'),
   http = _dereq_('http');
 
-
 function sign_all (private_keys, message) {
   if(!Array.isArray(private_keys))
     throw new Error('private_keys must be an array');
@@ -6486,9 +6485,16 @@ function sign_all (private_keys, message) {
 
   private_keys.forEach(function (priv) {
     var bytes = bitcoinjs.base58.checkDecode(priv);
-    var key = new bitcoinjs.ECKey(bytes);
-    var sig = bitcoinjs.Message.signMessage(key, message);
+
+    var compressed = false;
+    if (bytes.length > 32) {
+      compressed = true;
+    }
+
+    var key = new bitcoinjs.ECKey(bytes, compressed);
     var addr = key.getBitcoinAddress().toString();
+    var sig = bitcoinjs.Message.signMessage(key, message);
+
     res.signatures.push({
       address: addr,
       signature: sig
