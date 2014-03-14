@@ -106,7 +106,19 @@
               <div class="form-group">
                 <label class="col-lg-2 control-label" for="asset_proof_verify">Asset Proof</label>
                 <div class="col-lg-10 controls">
-                  <textarea class="form-control" id="asset_proof_verify" rows="12"></textarea>
+                  <textarea class="form-control" id="asset_proof_verify" rows="12">{
+  "id": "Horse Battery Staple BTC deposits",
+  "signatures": [
+    {
+      "address": "1MP66A41EuGCgVSKJ4WFhdpJxcZrWXESbZ",
+      "signature": "1b57b6167ccd4d7bb73c205b22b9d0e5bd026989c6cf3d5c6bca1351cde0abf674d66b80babf3c246232417b9edc9b85527b7eb77b7fa1d4477a31e6a2b01a6408"
+    }
+  ]
+}</textarea>
+                  <br>
+                  <div>
+                    <button id="btn_verify" class="btn btn-primary">Verify</button>
+                  </div>
                 </div>
               </div>
             </fieldset>

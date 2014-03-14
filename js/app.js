@@ -30,6 +30,7 @@ $(function () {
     $('#generate .flash').hide();
 
     var private_keys = $('#private_keys').val().split(',');
+    private_keys.forEach(function (val, i) { private_keys[i] = val.trim(); });
     var message = $('#message').val();
 
     var proof = baproof.signAll(private_keys, message);
@@ -46,40 +47,46 @@ $(function () {
     e.preventDefault();
     $('#verify .flash').hide();
 
-    var res;
+    var proof = JSON.parse($('#asset_proof_verify').val());
+
+    var res = baproof.verifySignatures(proof);
+
     var html = '';
+    if (res) {
+      html = 'Proof verified successfuly!';
+      $('#verification').removeClass('alert-danger').addClass('alert-success').html(html);
+    }
+    else {
+      html += 'Verification failed!';
+      $('#verification').removeClass('alert-success').addClass('alert-danger').html(html);
+    }
+
+    $('#verification').html(html);
+    $('#verify_results').show();
+
+    // Retrieve total amount controled by addresses
+    var addresses = [];
+    proof.signatures.forEach(function (obj) {
+      addresses.push(obj.address);
+    });
 
     try {
-      var partial_tree = blproof.deserializePartialTree($('#partial_tree').val());
-      var expected_root = JSON.parse($('#expected_root').val());
-
-      res = blproof.verifyTree(partial_tree, expected_root);
+      baproof.getBalance(addresses, function (err, balance) {
+        if (err) {
+          html += JSON.stringify(err);
+        }
+        else {
+          html += '<h3>Balance: ' + balance + '</h3>';
+        }
+        $('#verification').html(html);
+      });
     }
-    catch (err) {
-      html += 'Verification failed!';
-      html += '<br><br>';
-      html += err.message;
-
-      $('#verification').removeClass('alert-success').addClass('alert-danger').html(html);
-      return;
-    }
-
-    html += 'Verification successful!';
-    html += '<br><br>';
-    html += 'User: ' + res.user;
-    html += '<br>';
-    html += 'Balance: ' + res.value;
-
-    $('#verification').removeClass('alert-danger').addClass('alert-success').html(html);
-    $('#verify_results').show();
+    catch (err) {}
   });
 });
 
+// Initialize
 $(function () {
-  $.get('accounts.json', function (data) {
-    $('#accounts').html(data);
-
-    $('#btn_generate').trigger('click');
-  }, 'text');
+  $('#btn_generate').trigger('click');
 });
 
