@@ -6536,7 +6536,7 @@ function get_balance (addresses, cb) {
   async.eachLimit(addresses, parallel_ops, function (addr, cb) {
     http.get({
       host: 'blockchain.info',
-      path : '/address/' + addr + '?format=json',
+      path : '/address/' + addr + '?format=json&cors=true',
       scheme: 'http'
     }, function (res) {
       var data = '';
