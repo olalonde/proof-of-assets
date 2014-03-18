@@ -81,7 +81,7 @@ program
   .action(function (id, domain, opts) {
     // Private keys are passed directly, no need to do RPC calls
     if (opts.keys) {
-      var res = baproof.signAll(opts.keys, id);
+      var res = baproof.signAll(opts.keys, id, domain);
       console.log(JSON.stringify(res));
       return;
     }
