@@ -31,9 +31,10 @@ $(function () {
 
     var private_keys = $('#private_keys').val().split(',');
     private_keys.forEach(function (val, i) { private_keys[i] = val.trim(); });
-    var message = $('#message').val();
+    var domain = $('#domain').val();
+    var id = $('#message').val();
 
-    var proof = baproof.signAll(private_keys, message);
+    var proof = baproof.signAll(private_keys, id, domain);
 
     $('#asset_proof').html(serialize(proof));
 

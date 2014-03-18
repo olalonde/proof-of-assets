@@ -64,10 +64,16 @@
             <fieldset>
               <legend>Generate</legend>
               <div class="form-group">
-                <label class="col-lg-2 control-label" for="accounts">Message
+                <label class="col-lg-2 control-label" for="domain">Domain</label>
+                <div class="col-lg-10 controls">
+                  <input class="form-control" id="domain" value="localhost">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-2 control-label" for="accounts">ID
                 </label>
                 <div class="col-lg-10 controls">
-                  <textarea class="form-control" id="message" rows="4">Horse Battery Staple BTC deposits</textarea>
+                  <input class="form-control" id="message" value="Horse Battery Staple BTC deposits">
                 </div>
               </div>
 
@@ -109,12 +115,14 @@
               <div class="form-group">
                 <label class="col-lg-2 control-label" for="asset_proof_verify">Asset Proof</label>
                 <div class="col-lg-10 controls">
-                  <textarea class="form-control" id="asset_proof_verify" rows="12">{
+                  <textarea class="form-control" id="asset_proof_verify"
+                    rows="12">{
   "id": "Horse Battery Staple BTC deposits",
+  "domain": "localhost",
   "signatures": [
     {
       "address": "1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T",
-      "signature": "1c3179ebfc90b434401100e9275e23c61a865d64b9af73b3ed816f3ba219ca3997ffa5f13cd65fcd2ae6a9409ef21d24e8fb44547ecae1eab0a13c00b6e9bf666a"
+      "signature": "1cd3ac3c59f682a812874e8f7fa1cd840aff7efb5cc4a42d4051114a2b435c29cf5dfd5d3b39e9b135f14c991819abdbf67f49a9cbb05487aaf3a06e8e79d3688e"
     }
   ]
 }</textarea>
