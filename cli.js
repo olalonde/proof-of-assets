@@ -74,17 +74,19 @@ program
   });
 
 program
-  .command('signall <id>')
+  .command('signall <id> <domain>')
   .description('Generates an asset proof file with all private keys in wallet.')
   .option('--keys <keys>', 'Comma separated list of private keys used to sign.', parse_list)
   .option('--addresses <addresses>', 'Comma separated list of addresses to sign.', parse_list)
-  .action(function (id, opts) {
+  .action(function (id, domain, opts) {
     // Private keys are passed directly, no need to do RPC calls
     if (opts.keys) {
       var res = baproof.signAll(opts.keys, id);
       console.log(JSON.stringify(res));
       return;
     }
+
+    var msg = domain + '' + id;
 
     var client = new bitcoin.Client({
       host: program.host,
@@ -101,6 +103,7 @@ program
     var addresses = opts.addresses || [],
       output = {
         id: id,
+        domain: domain,
         signatures: []
       };
 
@@ -126,7 +129,7 @@ program
       function (cb) {
 
         async.each(addresses, function (addr, cb) {
-          client.cmd('signmessage', addr, id, function (err, res) {
+          client.cmd('signmessage', addr, msg, function (err, res) {
             if (err) return cb(err);
 
             output.signatures.push({
