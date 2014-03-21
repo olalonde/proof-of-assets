@@ -1,10 +1,10 @@
 {
-  "name": "baproof",
+  "name": "aproof",
   "version": "0.0.8",
-  "description": "Tool to prove how many bitcoins someone controls. Intended for use as part of the blind-solvency-proof scheme.",
+  "description": "Proof of Assets (PoL) library and CLI",
   "main": "index.js",
   "bin": {
-    "baproof": "./cli.js"
+    "aproof": "./cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,6 +35,7 @@
     "commander": "~2.1.0",
     "bitcoin": "~2.0.1",
     "async": "~0.2.10",
-    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git"
+    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git",
+    "blproof": "0.0.13"
   }
 }
