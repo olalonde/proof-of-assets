@@ -1,3 +1,4 @@
+
 # Proof of Assets
 
 *Proof of Assets* specification and Javascript implementation.
