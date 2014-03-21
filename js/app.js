@@ -34,7 +34,7 @@ $(function () {
     var domain = $('#domain').val();
     var id = $('#message').val();
 
-    var proof = baproof.signAll(private_keys, id, domain);
+    var proof = aproof.signAll(private_keys, id, domain);
 
     $('#asset_proof').html(serialize(proof));
 
@@ -50,7 +50,7 @@ $(function () {
 
     var proof = JSON.parse($('#asset_proof_verify').val());
 
-    var res = baproof.verifySignatures(proof);
+    var res = aproof.verifySignatures(proof);
 
     var html = '';
     if (res) {
@@ -71,7 +71,7 @@ $(function () {
       addresses.push(obj.address);
     });
 
-    baproof.getBalance(addresses, function (err, balance) {
+    aproof.getBalance(addresses, function (err, balance) {
       if (err) {
         html += JSON.stringify(err);
       }
