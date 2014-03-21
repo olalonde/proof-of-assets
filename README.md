@@ -11,7 +11,7 @@ cryptocurrency.
 The Proof of Assets scheme can be used as part of the broader 
 [Proof of Solvency](pos) scheme.
 
-[Proof of Assets online tools](http://olalonde.github.io/blind-liability-proof)
+[Proof of Assets online tools](http://olalonde.github.io/bitcoin-asset-proof)
 
 **Table of Contents**
 
