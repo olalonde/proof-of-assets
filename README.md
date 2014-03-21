@@ -7,12 +7,12 @@ Proof of Assets (PoA) is a scheme designed to let entitites (operators)
 prove that they control a given amount of Bitcoin or other blockchain based
 cryptocurrency. 
 
-[pos]: https://github.com/olalonde/blind-solvency-proof 
-
 The Proof of Assets scheme can be used as part of the broader 
 [Proof of Solvency][pos] scheme.
 
-[Proof of Assets online tools](http://olalonde.github.io/bitcoin-asset-proof)
+[pos]: https://github.com/olalonde/proof-of-solvency
+
+[Proof of Assets online tools](http://olalonde.github.io/proof-of-assets)
 
 **Table of Contents**
 
@@ -88,7 +88,7 @@ See https://github.com/etotheipi/BitcoinArmory/pull/184/files
 
 ### Publishing protocol
 
-See [olalonde/blind-solvency-proof](https://github.com/olalonde/blind-solvency-proof#assets-proof).
+See [olalonde/proof-of-solvency](https://github.com/olalonde/proof-of-solvency#assets-proof).
 
 ### Known limitations
 
