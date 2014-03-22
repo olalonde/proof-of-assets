@@ -75,8 +75,8 @@ extended key (from HD wallets) and published with its chain code (TODO).
     "currency": "BTC"
   },
   "signatures": [
-    { "address": "", "signature": "" },
-    { "address": "", "signature": "", "chain": "" }
+    { "signature": "" },
+    { "signature": "", "chain": "" }
   ]
 }
 ```
