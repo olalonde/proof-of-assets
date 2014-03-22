@@ -61,8 +61,9 @@ $ browserify ./lib/index.js --standalone aproof > build/aproof.js
 
 TODO...
 
-The assets proof is done by signing an identifier with all private keys in a
-Bitcoin wallet.
+The assets proof is done by signing an identifier with all the private
+keys in a Bitcoin wallet. A signature can also be done using a private
+extended key (from HD wallets) and published with its chain code (TODO).
 
 ### Serialized data formats (draft)
 
@@ -70,7 +71,8 @@ Bitcoin wallet.
 {
   "id": "MtGox.com BTC assets"
   "signatures": [
-    { "address": "", "signature": "" }
+    { "address": "", "signature": "" },
+    { "address": "", "chain": "", "signature": "" }
   ],
   "currency": "BTC"
 }
