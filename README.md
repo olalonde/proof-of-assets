@@ -24,7 +24,7 @@ The Proof of Assets scheme can be used as part of the broader
   - [Publishing protocol](#publishing-protocol)
   - [Known limitations](#known-limitations)
 
-TODO:
+**WORK IN PROGRESS**:
 
 - Only supports bitcoind at the moment 
 - Doesn't support HD wallets yet
@@ -59,9 +59,9 @@ $ browserify ./lib/index.js --standalone aproof > build/aproof.js
 
 ## Specification
 
-TODO...
+WORK IN PROGRESS...
 
-The assets proof is done by signing an identifier with all the private
+The assets proof is done by signing a message with all the private
 keys in a Bitcoin wallet. A signature can also be done using a private
 extended key (from HD wallets) and published with its chain code (TODO).
 
@@ -69,17 +69,33 @@ extended key (from HD wallets) and published with its chain code (TODO).
 
 ```json
 {
-  "meta": {
-    "id": "MtGox.com BTC assets",
-    "domain": "domain.com",
-    "currency": "BTC"
-  },
+  "message": "some message",
+  "currency": "BTC",
   "signatures": [
     { "signature": "" },
     { "signature": "", "chain": "" }
   ]
 }
 ```
+
+The asset proof may also optionally contain a `pos` property which is a JSON
+object. The `Proof Of Solvency` makes use of this field to impose how
+a message should be computed.
+
+```json
+{
+  "pos": {
+    "id": "some identifier",
+    "domain": "somedomain.com"
+  }
+}
+```
+
+With the above meta information, PoS verifies that the message is equal
+to domain + ' ' + id. PoS also verifies that the assets proof is only
+valid for the given domain.
+
+This would prevent a malicious site from "stealing" another site's proofs.
 
 ### Implementations
 
