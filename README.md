@@ -69,12 +69,15 @@ extended key (from HD wallets) and published with its chain code (TODO).
 
 ```json
 {
-  "id": "MtGox.com BTC assets"
+  "meta": {
+    "id": "MtGox.com BTC assets",
+    "domain": "domain.com",
+    "currency": "BTC"
+  },
   "signatures": [
     { "address": "", "signature": "" },
-    { "address": "", "chain": "", "signature": "" }
-  ],
-  "currency": "BTC"
+    { "address": "", "signature": "", "chain": "" }
+  ]
 }
 ```
 
