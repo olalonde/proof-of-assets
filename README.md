@@ -78,24 +78,22 @@ extended key (from HD wallets) and published with its chain code (TODO).
 }
 ```
 
-The asset proof may also optionally contain a `pos` property which is a JSON
-object. The `Proof Of Solvency` makes use of this field to impose how
-a message should be computed.
+The assets proof may also optionally be extended with an `id` and
+a `domain` property. The `Proof Of Solvency` uses of those field to impose how
+a message should be contstructed and uses the ID to associate the PoA with a PoL.
 
 ```json
 {
-  "pos": {
-    "id": "some identifier",
-    "domain": "somedomain.com"
-  }
+  "id": "some identifier",
+  "domain": "somedomain.com"
 }
 ```
 
-With the above meta information, PoS verifies that the message is equal
+Using `id` and `domain` properties, PoS verifies that the message is equal
 to domain + ' ' + id. PoS also verifies that the assets proof is only
 valid for the given domain.
 
-This would prevent a malicious site from "stealing" another site's proofs.
+This would prevent a malicious site from "stealing" another site's asset proof.
 
 ### Implementations
 
