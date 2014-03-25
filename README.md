@@ -89,8 +89,8 @@ the domain for which the proof is valid).
   "message": "",
   "currency": "BTC",
   "signatures": [
-    { "signature": "" },
-    { "signature": "", "chain": "" }
+    { "signature": "", "address": "" },
+    { "signature": "", "address": "", "chain": "" }
   ]
 }
 ```

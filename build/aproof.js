@@ -6,13 +6,13 @@ var bitcoinjs = _dereq_('bitcoinjs-lib'),
   async = _dereq_('async'),
   http = _dereq_('http');
 
-function sign_all (private_keys, id, domain) {
+function sign_all (private_keys, message, blockhash) {
   if(!Array.isArray(private_keys))
     throw new Error('private_keys must be an array');
 
-  var res = { id: id, domain: domain, signatures: [] };
+  var res = { message: message, blockhash: blockhash, signatures: [] };
 
-  var message = (domain) ? domain + id : id;
+  var message = (blockhash) ? blockhash + '|' + message : message;
 
   private_keys.forEach(function (priv) {
     var bytes = bitcoinjs.base58.checkDecode(priv);
@@ -43,8 +43,7 @@ function verify_signature (addr, sig, message) {
 }
 
 function verify_signatures (obj) {
-  obj.domain = obj.domain || '';
-  var message = obj.domain + '' + obj.id;
+  var message = obj.blockhash ? obj.blockhash + '|' + obj.message : obj.message;
 
   for (var i = 0; i < obj.signatures.length; i++) {
     var addr = obj.signatures[i].address;

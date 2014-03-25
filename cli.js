@@ -31,7 +31,7 @@ program
   .action(function (file) {
     var obj = JSON.parse(fs.readFileSync(file));
     if (baproof.verifySignatures(obj)) {
-      console.log(obj.id + ' signatures are valid!');
+      console.log(obj.message + ' signatures are valid!');
     }
     else {
       console.error('INVALID signature found!');
@@ -76,19 +76,19 @@ program
   });
 
 program
-  .command('signall <id> <domain>')
+  .command('signall <message> <blockhash>')
   .description('Generates an asset proof file with all private keys in wallet.')
   .option('--keys <keys>', 'Comma separated list of private keys used to sign.', parse_list)
   .option('--addresses <addresses>', 'Comma separated list of addresses to sign.', parse_list)
-  .action(function (id, domain, opts) {
+  .action(function (message, blockhash, opts) {
     // Private keys are passed directly, no need to do RPC calls
     if (opts.keys) {
-      var res = baproof.signAll(opts.keys, id, domain);
+      var res = baproof.signAll(opts.keys, message, blockhash);
       console.log(JSON.stringify(res));
       return;
     }
 
-    var msg = domain + '' + id;
+    var msg = blockhash + '|' + message;
 
     var client = new bitcoin.Client({
       host: program.host,
@@ -104,8 +104,8 @@ program
 
     var addresses = opts.addresses || [],
       output = {
-        id: id,
-        domain: domain,
+        message: message,
+        blockhash: blockhash,
         signatures: []
       };
 
@@ -157,3 +157,4 @@ program
   });
 
 program.parse(process.argv);
+if (!program.args.length) program.help();
