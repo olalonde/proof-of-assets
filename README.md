@@ -68,15 +68,18 @@ master key of an HD wallet and published alongside its chain code.
 The message to sign is `blockhash + '|' + message`. Where `+` represents
 concatenation.
 
-The `blockhash` represents the latest block hash (with at least 6
+`blockhash` represents the latest block hash (with at least 6
 confirmations) of the `currency`'s blockchain.
 
 This block hash can be used by verifiers to determine how long ago the
 PoA was produced. A PoA that was produced a long time ago could indicate
-that an operator lost the keys to its cold wallet for example. 
+that an operator lost the keys of its cold wallet for example. 
 
 Verifiers should issue warnings if a PoA is more than X (to be
 determined) days old or if the blockhash was omitted.
+
+`message` is an arbitrary message ([Proof of Solvency][pos] requires it to be
+the domain for which the proof is valid).
 
 ### Serialized data formats (draft)
 
@@ -91,10 +94,6 @@ determined) days old or if the blockhash was omitted.
   ]
 }
 ```
-
-The `Proof Of Solvency` requires that the message represents the domain for which the
-proof is valid. This measure should theoretically prevent malicious
-operators from "borrowing" another operator's asset proof.
 
 ### Implementations
 
