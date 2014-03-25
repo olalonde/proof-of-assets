@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+console.error('WARNING: This tool does not currently conform with latest specification.');
+
 var program = require('commander'),
   bitcoin = require('bitcoin'),
   async = require('async'),

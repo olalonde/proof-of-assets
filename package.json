@@ -1,6 +1,6 @@
 {
   "name": "aproof",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Proof of Assets (PoL) library and CLI",
   "main": "index.js",
   "bin": {
