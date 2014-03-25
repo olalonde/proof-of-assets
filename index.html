@@ -63,25 +63,33 @@
           <form action="/" class="form-horizontal" method="get">
             <fieldset>
               <legend>Generate</legend>
+              <!-- only BTC support at moment -->
               <div class="form-group">
-                <label class="col-lg-2 control-label" for="domain">Domain</label>
-                <div class="col-lg-10 controls">
-                  <input class="form-control" id="domain" value="localhost">
+                <label class="col-xs-2 control-label" for="currency">Currency</label>
+                <div class="col-xs-10 col-sm-2 controls">
+                  <input class="form-control" readonly="readonly" id="currency" value="BTC">
                 </div>
               </div>
+
               <div class="form-group">
-                <label class="col-lg-2 control-label" for="accounts">ID
-                </label>
-                <div class="col-lg-10 controls">
+                <label class="col-xs-2 control-label" for="blockhash">Latest block hash</label>
+                <div class="col-xs-10 controls">
+                  <input class="form-control" id="blockhash" value="">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-xs-2 control-label" for="message">Message</label>
+                <div class="col-xs-10 controls">
                   <input class="form-control" id="message" value="Horse Battery Staple BTC deposits">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-lg-2 control-label" for="accounts">Private Keys
+                <label class="col-xs-2 control-label" for="accounts">Private Keys
                   <p class="help-block">Separate keys with <code>,</code>.</p>
                 </label>
-                <div class="col-lg-10 controls">
+                <div class="col-xs-10 controls">
                   <textarea class="form-control" id="private_keys" rows="2">5KJvsngHeMpm884wtkJNzQGaCErckhHJBGFsvd3VyK5qMZXj3hS</textarea>
                   <br>
                   <div>
@@ -117,12 +125,12 @@
                 <div class="col-lg-10 controls">
                   <textarea class="form-control" id="asset_proof_verify"
                     rows="12">{
-  "id": "Horse Battery Staple BTC deposits",
-  "domain": "localhost",
+  "message": "Horse Battery Staple BTC deposits",
+  "blockhash": "",
   "signatures": [
     {
       "address": "1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T",
-      "signature": "1cd3ac3c59f682a812874e8f7fa1cd840aff7efb5cc4a42d4051114a2b435c29cf5dfd5d3b39e9b135f14c991819abdbf67f49a9cbb05487aaf3a06e8e79d3688e"
+      "signature": "1c3179ebfc90b434401100e9275e23c61a865d64b9af73b3ed816f3ba219ca3997ffa5f13cd65fcd2ae6a9409ef21d24e8fb44547ecae1eab0a13c00b6e9bf666a"
     }
   ]
 }</textarea>
