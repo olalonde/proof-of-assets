@@ -63,13 +63,13 @@ WORK IN PROGRESS...
 
 The assets proof is done by signing a message with all the private
 keys of a Bitcoin wallet or alternatively, with the private
-master key of an HD wallets and published alongside its chain code.
+master key of an HD wallet and published alongside its chain code.
 
 The message to sign is `blockhash + '|' + message`. Where `+` represents
 concatenation.
 
-The blockhash represents the latest block hash of the
-currency's blockchain.
+The `blockhash` represents the latest block hash (with at least 6
+confirmations) of the `currency`'s blockchain.
 
 This block hash can be used by verifiers to determine how long ago the
 PoA was produced. A PoA that was produced a long time ago could indicate
@@ -93,8 +93,8 @@ determined) days old or if the blockhash was omitted.
 ```
 
 The `Proof Of Solvency` requires that the message represents the domain for which the
-proof is valid. This measure theoretically prevents malicious sites from
-"borrowing" another site's asset proof.
+proof is valid. This measure should theoretically prevent malicious
+operators from "borrowing" another operator's asset proof.
 
 ### Implementations
 
