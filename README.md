@@ -62,14 +62,28 @@ $ browserify ./lib/index.js --standalone aproof > build/aproof.js
 WORK IN PROGRESS...
 
 The assets proof is done by signing a message with all the private
-keys in a Bitcoin wallet. A signature can also be done using a private
-extended key (from HD wallets) and published with its chain code (TODO).
+keys of a Bitcoin wallet or alternatively, with the private
+master key of an HD wallets and published alongside its chain code.
+
+The message to sign is `blockhash + '|' + message`. Where `+` represents
+concatenation.
+
+The blockhash represents the latest block hash of the
+currency's blockchain.
+
+This block hash can be used by verifiers to determine how long ago the
+PoA was produced. A PoA that was produced a long time ago could indicate
+that an operator lost the keys to its cold wallet for example. 
+
+Verifiers should issue warnings if a PoA is more than X (to be
+determined) days old or if the blockhash was omitted.
 
 ### Serialized data formats (draft)
 
 ```json
 {
-  "message": "some message",
+  "blockhash": "",
+  "message": "",
   "currency": "BTC",
   "signatures": [
     { "signature": "" },
@@ -78,20 +92,9 @@ extended key (from HD wallets) and published with its chain code (TODO).
 }
 ```
 
-The assets proof may also optionally be extended with a `domain` property. 
-The `Proof Of Solvency` uses of this field to impose how
-a message should be contstructed.
-
-```json
-{
-  "domain": "somedomain.com"
-}
-```
-
-PoS verifies that the message is equal to domain + ' ' + currency. PoS also verifies 
-that the assets proof is only valid for the given domain.
-
-This would prevent a malicious site from "stealing" another site's asset proof.
+The `Proof Of Solvency` requires that the message represents the domain for which the
+proof is valid. This measure theoretically prevents malicious sites from
+"borrowing" another site's asset proof.
 
 ### Implementations
 
