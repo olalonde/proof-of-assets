@@ -6,11 +6,12 @@ var bitcoinjs = _dereq_('bitcoinjs-lib'),
   async = _dereq_('async'),
   http = _dereq_('http');
 
-function sign_all (private_keys, message, blockhash) {
+function sign_all (private_keys, message, blockhash, currency) {
+  currency = currency || 'BTC';
   if(!Array.isArray(private_keys))
     throw new Error('private_keys must be an array');
 
-  var res = { message: message, blockhash: blockhash, signatures: [] };
+  var res = { message: message, blockhash: blockhash, currency: currency, signatures: [] };
 
   var message = (blockhash) ? blockhash + '|' + message : message;
 
