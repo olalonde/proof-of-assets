@@ -1,71 +1,103 @@
-# baproof - Bitcoin asset proof
 
-Intended for use as part of
-[olalonde/blind-solvency-proof](https://github.com/olalonde/blind-solvency-proof)
-scheme.
+# Proof of Assets
 
-Scheme and companion tool to prove how many bitcoins an entity controls.
-Currently supports bitcoind (see [Alternative
-implementations](#alternative-implementations)).
+*Proof of Assets* specification and Javascript implementation.
 
-*NEW*: [web UI](http://olalonde.github.io/bitcoin-asset-proof)
+Proof of Assets (PoA) is a scheme designed to let entitites (operators)
+prove that they control a given amount of Bitcoin or other blockchain based
+cryptocurrency. 
+
+The Proof of Assets scheme can be used as part of the broader 
+[Proof of Solvency][pos] scheme.
+
+[pos]: https://github.com/olalonde/proof-of-solvency
+
+[Proof of Assets online tools](http://olalonde.github.io/proof-of-assets)
+
+**Table of Contents**
+
+- [Install](#install)
+- [Usage](#usage)
+- [Specification](#specification)
+  - [Serialized data formats (draft)](#serialized-data-formats-draft)
+  - [Implementations](#implementations)
+  - [Publishing protocol](#publishing-protocol)
+  - [Known limitations](#known-limitations)
+
+**WORK IN PROGRESS**:
+
+- Only supports bitcoind at the moment 
+- Doesn't support HD wallets yet
 
 Beer fund: **1ECyyu39RtDNAuk3HRCRWwD4syBF2ZGzdx**
 
 ## Install
 
 ```
-npm install -g baproof
+npm install -g aproof
 ```
 
 ## Usage
 
 ```
-Generate bitcoin asset proof
+Generate asset proof
 
-$ baproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-asset-proof.out.json
+$ aproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-asset-proof.out.json
 
 Verify signatures
 
-$ baproof verifysignatures btc-asset-proof.out.json
+$ aproof verifysignatures btc-asset-proof.out.json
 
 Verify signatures and show total balance of all addresses
 
-$ baproof balance -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" btc-asset-proof.out.json
+$ aproof balance -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" btc-asset-proof.out.json
 
 Browser build:
 
-$ browserify ./lib/index.js --standalone baproof > build/baproof.js
+$ browserify ./lib/index.js --standalone aproof > build/aproof.js
 ```
 
-## Assets proof
+## Specification
 
-The assets proof is done by signing an identifier with all private keys in a
-Bitcoin wallet.
+WORK IN PROGRESS...
 
-## Embedded
+The assets proof is done by signing a message with all the private
+keys of a Bitcoin wallet or alternatively, with the private
+master key of an HD wallet and published alongside its chain code.
 
-```html
-<meta name='x-assets-proof' data='/btc-assets.json'>
-```
+The message to sign is `blockhash + '|' + message`. Where `+` represents
+concatenation.
 
-## File format (draft)
+`blockhash` represents the latest block hash (with at least 6
+confirmations) of the `currency`'s blockchain.
 
-`btc-assets.json`
+This block hash can be used by verifiers to determine how long ago the
+PoA was produced. A PoA that was produced a long time ago could indicate
+that an operator lost the keys of its cold wallet for example. 
+
+Verifiers should issue warnings if a PoA is more than X (to be
+determined) days old or if the blockhash was omitted.
+
+`message` is an arbitrary message ([Proof of Solvency][pos] requires it to be
+the domain for which the proof is valid).
+
+### Serialized data formats (draft)
 
 ```json
 {
-  "id": "MtGox.com BTC assets"
+  "blockhash": "",
+  "message": "",
+  "currency": "BTC",
   "signatures": [
-    { "address": "", "signature": "" }
-  ],
-  "type": "BTC" (optional - defaults to bitcoin)
+    { "signature": "", "address": "" },
+    { "signature": "", "address": "", "chain": "" }
+  ]
 }
 ```
 
-## Alternative implementations
+### Implementations
 
-### Armory
+#### Armory
 
 See https://github.com/etotheipi/BitcoinArmory/pull/184/files
 
@@ -73,7 +105,11 @@ See https://github.com/etotheipi/BitcoinArmory/pull/184/files
 ./extras/asset-proof.py  your.wallet "EmptyGox Btc Assets" emptygox-btc-assets.json
 ```
 
-## Limitations
+### Publishing protocol
+
+See [olalonde/proof-of-solvency](https://github.com/olalonde/proof-of-solvency#assets-proof).
+
+### Known limitations
 
 TODO... (you could convince someone else to signmessage for you?) There
 could be an online wallet which allows you to signmessage without
