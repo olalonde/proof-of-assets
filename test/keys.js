@@ -45,6 +45,6 @@ describe('Test private key signatures and verify the proof', function() {
             return done();
         });
 
-        return done();
+        console.log(JSON.stringify(proof, null, 4));
     });
 });
