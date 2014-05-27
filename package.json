@@ -1,13 +1,13 @@
 {
   "name": "aproof",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Proof of Assets (PoL) library and CLI",
   "main": "index.js",
   "bin": {
     "aproof": "./cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/keys -t 10000 && mocha test/hdwallet -t 10000",
     "build": "./node_modules/.bin/browserify index.js --standalone aproof > ./build/aproof.js"
   },
   "repository": {
@@ -31,13 +31,13 @@
   },
   "devDependencies": {
       "browserify": "~3.32.1",
-      "mocha": "*",
-      "assert": "*"
+      "mocha": "~1.19.0",
+      "assert": "~1.1.1"
   },
   "dependencies": {
     "commander": "~2.1.0",
     "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git",
     "blproof": "0.0.13",
-    "helloblock-js": "*"
+    "request": "~2.36.0"
   }
 }
