@@ -30,13 +30,14 @@
     "url": "https://github.com/olalonde/bitcoin-asset-proof/issues"
   },
   "devDependencies": {
-    "browserify": "~3.32.1"
+      "browserify": "~3.32.1",
+      "mocha": "*",
+      "assert": "*"
   },
   "dependencies": {
     "commander": "~2.1.0",
-    "bitcoin": "~2.0.1",
-    "async": "~0.2.10",
     "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git",
-    "blproof": "0.0.13"
+    "blproof": "0.0.13",
+    "helloblock-js": "*"
   }
 }
