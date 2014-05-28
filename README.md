@@ -117,6 +117,7 @@ the domain for which the proof is valid).
     "blockhash": "000000000000000033a7e88bdaca0b14b190cced46d0c5667b27bd82d429792f",
     "currency": "XBT",
     "network": "bitcoin",
+    "required_signatures": 2,
     "signatures": [
         {
             "xpub": "xpub6AHA9hZDN11k2ijHMeS5QqHx2KP9aMBRhTDqANMnwVtdyw2TDYRmF8PjpvwUFcL1Et8Hj59S3gTSMcUQ5gAqTz3Wd8EsMTmF3DChhqPQBnU",

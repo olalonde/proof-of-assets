@@ -27,8 +27,9 @@ describe('Test private key signatures and verify the proof', function() {
         var blockhash = '000000000000000033a7e88bdaca0b14b190cced46d0c5667b27bd82d429792f';
         var currency = 'XBT';
         var network = 'bitcoin';
+        var requiredSignatures = 2;
 
-        var proof = index.signAll(type, keys, message, blockhash, currency, network);
+        var proof = index.signAll(type, keys, message, blockhash, currency, network, requiredSignatures);
         proof.addresses = addresses;
 
         assert(proof.type === type);
@@ -36,6 +37,7 @@ describe('Test private key signatures and verify the proof', function() {
         assert(proof.blockhash === blockhash);
         assert(proof.currency === currency);
         assert(proof.network === network);
+        assert(proof.required_signatures === requiredSignatures);
         assert(proof.signatures instanceof Array);
         proof.signatures.forEach(function(signature, i) {
             assert(signature.signature === signatures[i]);
