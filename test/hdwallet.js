@@ -18,9 +18,9 @@ describe('Test private key signatures and verify the proof', function() {
             {address: '3GEVirvnnG3RHVL3r9hkkawDmW1VgA85BR', index: 999}
         ];
         var signatures = [
-            '1fe31f6871a7f00264e71b94e5ec63c94fa45c37b71b18f6a54006f77093c042732c422770b8141520da7d6dc6de74248ea6799462549d386751eb49fe2b137c8b',
-            '20e69a3bc9d0b03f0e984dc0f6a7f81c9709e0b0f051db40a25755968532e2ded542dfdf67f66a200eb879139f2405d58105be3779c9d44441138e1a1af4adff67',
-            '1f306a2f5699b0d44fe39d329916ec8f1f06a7cbcecfcba36be43f196c66a1b674687b727b98f30e0c0ddadcabac58d1aecca886874d0821321553fddff76559c6'
+            '20ca3b927905f5a8cd89beb9294d9c77394352ed2176960ad9f238b4aa092379a907eb2b5f488e1770a5aab10979d84cf66ad339e69c1d400ad0498d518373e2c1',
+            '1f4cf89a627b5ab664b8d668a04550e051693a3b8e1519b2b279cce93f885af0120d0be2be2217cd755a1b2dc4927cfbdb32cbcbe1c48cd4571a919a55408bb60e',
+            '1f7bb9f77051e69a630aa577eeb3bd825d493e5a018336da36a03dd405009df8284caf023f1757428ec36f3ca80cf2be8e56962f235f7be25fad9c8b607d1b46b5'
         ];
         var type = 'bip32';
         var message = 'I am the very model of a modern major general.';
