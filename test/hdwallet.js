@@ -10,12 +10,10 @@ describe('Test private key signatures and verify the proof', function() {
             'xprv9w6E2GKcrsr5HTzTLVGanPUUSbkRnnVzjXRuK72pQ1zVhnorqyfnLga8HEMcHpW8K5QMtf4ci5TiauZnTEmpqWvxcoHGMzo9g7HDmvwPixF'
         ];
         var addresses = [
-            {address: '3KUAE5URmYAwu6Wq1yfsGGXwb3dRsEh4aT', index: 0},
-            {address: '3HgG3WhvqMa389QcrLia5enQbbdWhSYfmG', index: 1},
-            {address: '3KponhoPCpwTqENkCBCqLjAqkr1DvHkWkt', index: 2},
-            {address: '35ZxQm4QNx1j4jSsqDVdge9ZKrfCivivv2', index: 3},
-            {address: '3HZ8a1iXPJ5pxaZt5qx8qyDdS7jCkVgfE6', index: 10},
-            {address: '3GEVirvnnG3RHVL3r9hkkawDmW1VgA85BR', index: 999}
+            '3KUAE5URmYAwu6Wq1yfsGGXwb3dRsEh4aT',
+            '3HgG3WhvqMa389QcrLia5enQbbdWhSYfmG',
+            '3KponhoPCpwTqENkCBCqLjAqkr1DvHkWkt',
+            '35ZxQm4QNx1j4jSsqDVdge9ZKrfCivivv2'
         ];
         var signatures = [
             '20ca3b927905f5a8cd89beb9294d9c77394352ed2176960ad9f238b4aa092379a907eb2b5f488e1770a5aab10979d84cf66ad339e69c1d400ad0498d518373e2c1',
@@ -28,9 +26,9 @@ describe('Test private key signatures and verify the proof', function() {
         var currency = 'XBT';
         var network = 'bitcoin';
         var requiredSignatures = 2;
+        var latestIndex = 3;
 
-        var proof = index.signAll(type, keys, message, blockhash, currency, network, requiredSignatures);
-        proof.addresses = addresses;
+        var proof = index.signAll(type, keys, message, blockhash, currency, network, requiredSignatures, latestIndex);
 
         assert(proof.type === type);
         assert(proof.message === message);
@@ -43,8 +41,9 @@ describe('Test private key signatures and verify the proof', function() {
             assert(signature.signature === signatures[i]);
         });
         assert(index.verifySignatures(proof));
-        proof.addresses.forEach(function(address, i) {
-            assert(address.address === addresses[i].address);
+        index.getAddresses(proof).forEach(function(address, i) {
+            console.log(address + ' ' + addresses[i]);
+            assert(address === addresses[i]);
         });
         index.getBalance(index.getAddresses(proof), network, function(err, balance) {
             assert(!err);
