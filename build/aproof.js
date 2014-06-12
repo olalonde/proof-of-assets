@@ -41,7 +41,7 @@ function verify_signature (addr, sig, message, network) {
   return res;
 }
 
-function getNetwork(currency, testnet){
+function get_network(currency, testnet){
 	var network = bitcoinjs.networks.bitcoin
 	if(currency === 'BTC'){
 		if(obj.testnet){
@@ -67,7 +67,8 @@ function getNetwork(currency, testnet){
 function verify_signatures (obj) {
   var message = obj.blockhash ? obj.blockhash + '|' + obj.message : obj.message;
   var currency = obj.currency || 'BTC'
-
+  
+  var network = get_network(currency, obj.testnet);
   for (var i = 0; i < obj.signatures.length; i++) {
     var addr = obj.signatures[i].address;
     var sig = obj.signatures[i].signature;
