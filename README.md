@@ -40,9 +40,16 @@ npm install -g aproof
 ## Usage
 
 ```
-Generate asset proof
+Generate asset proof:
 
-$ aproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" > btc-asset-proof.out.json
+$ aproof signall -h "localhost" -p 8332 --user "rpcuser" --pass "rpcpass" "MtGox.com BTC assets" 305479 > btc-asset-proof.out.json
+
+$ aproof signall -h "localhost" -p 18332 --user "rpcuser" --pass "rpcpass" --testnet true "Airbex.net BTC testnet assets" 305479 > btc-testnet-asset-proof.out.json
+
+$ aproof signall -h "localhost" -p 9332 --user "rpcuser" --pass "rpcpass" --currency 'LTC' "Airbex.net LTC assets" 584505 > ltc-asset-proof.out.json
+
+$ aproof signall -h "localhost" -p 22555 --user "rpcuser" --pass "rpcpass" --currency 'DOGE' "Airbex.net DOGE assets" 258265 > doge-asset-proof.out.json
+
 
 Verify signatures
 
