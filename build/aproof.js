@@ -44,17 +44,17 @@ function verify_signature (addr, sig, message, network) {
 function get_network(currency, testnet){
 	var network = bitcoinjs.networks.bitcoin
 	if(currency === 'BTC'){
-		if(obj.testnet){
+		if(testnet){
 			network = bitcoinjs.networks.testnet
 		}	  
 	} else if(currency === 'LTC'){
-		if(obj.testnet){
+		if(testnet){
 			network = bitcoinjs.networks.litecointestnet
 		} else {
 			network = bitcoinjs.networks.litecoin  
 		}
 	} else if(currency === 'DOGE'){
-		if(obj.testnet){
+		if(testnet){
 			network = bitcoinjs.networks.dogecointestnet
 		} else {
 			network = bitcoinjs.networks.dogecoin  
