@@ -62,6 +62,8 @@ function get_network(currency, testnet){
 	} else {
 		assert(false)
 	}	
+	
+	return network
 }
 
 function verify_signatures (obj) {
