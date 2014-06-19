@@ -34,11 +34,7 @@ function sign_all (private_keys, message, blockhash, currency) {
   return res;
 }
 
-function verify_signature (addr, sig, message, network) {
-  var res = bitcoinjs.Message.verifyBase64(addr, sig, message, network);
 
-  return res;
-}
 
 function get_network(currency, testnet){
 	var network = bitcoinjs.networks.bitcoin
@@ -65,19 +61,27 @@ function get_network(currency, testnet){
 	return network
 }
 
-function verify_signatures (obj) {
-  var message = obj.blockhash ? obj.blockhash + '|' + obj.message : obj.message;
-  var currency = obj.currency || 'BTC'
-  
-  var network = get_network(currency, obj.testnet);
-  for (var i = 0; i < obj.signatures.length; i++) {
-    var addr = obj.signatures[i].address;
-    var sig = obj.signatures[i].signature;
+function verify_signature (obj, addr, sig) {
+	var message = obj.blockhash ? obj.blockhash + '|' + obj.message : obj.message;
+	var currency = obj.currency || 'BTC'
+	var network = get_network(currency, obj.testnet);
+	var res = bitcoinjs.Message.verifyBase64(addr, sig, message, network);
+	return res;
+}
 
-    if (!verify_signature(addr, sig, message, network))
-      return false;
-  }
-  return true;
+function verify_signatures (obj) {
+	var res = true;
+	for (var i = 0; i < obj.signatures.length; i++) {
+		var addr = obj.signatures[i].address;
+		var sig = obj.signatures[i].signature;
+		if(verify_signature(obj, addr, sig)){
+			obj.signatures[i].signatureIsValid = true
+		} else {
+			res = false
+			obj.signatures[i].signatureIsValid = false
+		}
+	}
+	return res;
 }
 
 function get_addresses (obj) {
@@ -126,6 +130,7 @@ function get_balance (addresses, cb) {
 }
 
 module.exports.signAll = sign_all;
+module.exports.verifySignature = verify_signature;
 module.exports.verifySignatures = verify_signatures;
 module.exports.getBalance = get_balance;
 module.exports.getAddresses = get_addresses;
