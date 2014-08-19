@@ -119,7 +119,7 @@ program
       function (cb) {
         if (addresses.length > 0) return cb();
 
-        client.cmd('listreceivedbyaddress', 0, false, function (err, res){
+        client.cmd('listunspent', 0, function (err, res){
           if (err) return cb(err);
 
           if (!res.length) {
