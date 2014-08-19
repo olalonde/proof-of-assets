@@ -36,7 +36,7 @@
     "commander": "~2.1.0",
     "bitcoin": "~2.0.1",
     "async": "~0.2.10",
-    "bitcoinjs-lib": "git://github.com/bitcoinjs/bitcoinjs-lib.git#ad9a73a81b68499fe2dc07bd30c1c546e81f504a",
+    "bitcoinjs-lib": "git://github.com/FredericHeem/bitcoinjs-lib.git",
     "blproof": "0.0.13"
   }
 }
