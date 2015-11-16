@@ -29,7 +29,6 @@ The Proof of Assets scheme can be used as part of the broader
 - Only supports bitcoind at the moment 
 - Doesn't support HD wallets yet
 
-Beer fund: **1ECyyu39RtDNAuk3HRCRWwD4syBF2ZGzdx**
 
 ## Install
 
