@@ -83,7 +83,7 @@ program
   .action(function (message, blockhash, opts) {
     // Private keys are passed directly, no need to do RPC calls
     if (opts.keys) {
-      var res = baproof.signAll(opts.keys, message, blockhash);
+      var res = baproof.signAll('jbok', opts.keys, message, 'XBT', blockhash);
       console.log(JSON.stringify(res));
       return;
     }
